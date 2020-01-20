@@ -30,6 +30,14 @@ export default class Search extends Component {
       });
   }
 
+  view = link => {
+    window.location.href = link;
+  };
+
+  save = () => {
+    alert('saved');
+  };
+
   render() {
     return (
       <div>
@@ -42,6 +50,8 @@ export default class Search extends Component {
               author={book.author}
               description={book.description}
               link={book.link}
+              view={this.view}
+              save={this.save}
             />
           );
         })}

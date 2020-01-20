@@ -12,24 +12,20 @@ export default function Book(props) {
         </div>
         <div className='col-md-10 card-bg'>
           <div className='card-body'>
-            <h5 className='card-title'>Authors: {props.author}</h5>
-            <p className='card-text overflow-auto'>{props.description}</p>
-            <a className='card-link p-2 my-2' href={props.link}>
-              Source
-            </a>
-            <button
-              className='btn btn-dark p-2 my-2 d-block'
-              style={buttonStyleLeft}
-              onClick={props.view}>
-              View
-            </button>
-            <button
-              className='btn btn-dark p-2 my-2 d-block'
-              style={buttonStyleRight}
-              onClick={props.view}>
-              Delete
-            </button>
+            <div className='btn-group w-100' role='group'>
+              <button
+                type='button'
+                className='btn btn-secondary'
+                onClick={() => props.view(props.link)}>
+                View
+              </button>
+              <button type='button' className='btn btn-secondary' onClick={props.save}>
+                Save
+              </button>
+            </div>
           </div>
+          <h5 className='card-title px-4'>Authors: {props.author}</h5>
+          <p className='card-text px-4 pb-3'>{props.description}</p>
         </div>
       </div>
     </div>
@@ -37,20 +33,7 @@ export default function Book(props) {
 }
 
 const cardBody = {
-  minHeight: '20rem'
+  minHeight: '15rem'
 };
 
 const imagestyle = { display: 'block', margin: 'auto' };
-
-const buttonStyleLeft = {
-  bottom: '0',
-  position: 'absolute',
-  width: '45%'
-};
-
-const buttonStyleRight = {
-  bottom: '0',
-  position: 'absolute',
-  width: '45%',
-  right: '10px'
-};
