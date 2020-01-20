@@ -1,6 +1,6 @@
 module.exports = (app, db) => {
   // route to get all books from the DB
-  app.get('/book', (req, res) => {
+  app.get('/api/books', (req, res) => {
     db.Book.find()
       .then(book => {
         res.status(200).json(book);
@@ -11,10 +11,10 @@ module.exports = (app, db) => {
   });
 
   // route to create a books from the DB
-  app.post('/book', (req, res) => {
-    const { title, authors, description, image, link } = req.body;
+  app.post('/api/books', (req, res) => {
+    const { bookId, title, authors, description, image, link } = req.body;
 
-    db.Book.create({ title, authors, description, image, link })
+    db.Book.create({ bookId, title, authors, description, image, link })
       .then(newBook => {
         res.status(200).json(newBook);
       })
@@ -24,7 +24,7 @@ module.exports = (app, db) => {
   });
 
   // route to delete a books from the DB
-  app.delete('/book', (req, res) => {
+  app.delete('/api/books', (req, res) => {
     const { id } = req.body;
 
     db.Book.deleteOne({ _id: id })
