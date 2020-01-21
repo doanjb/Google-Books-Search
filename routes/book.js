@@ -14,6 +14,8 @@ module.exports = (app, db) => {
   app.post('/api/books', (req, res) => {
     const { bookId, title, authors, description, image, link } = req.body;
 
+    console.log('req.body :', req.body);
+
     db.Book.create({ bookId, title, authors, description, image, link })
       .then(newBook => {
         res.status(200).json(newBook);

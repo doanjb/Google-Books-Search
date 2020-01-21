@@ -4,7 +4,8 @@ const BookSchema = mongoose.Schema({
   bookId: {
     type: String,
     trim: true,
-    required: true
+    required: true,
+    unique: true
   },
   title: {
     type: String,

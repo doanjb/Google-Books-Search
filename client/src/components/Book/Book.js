@@ -8,7 +8,7 @@ export default function Book(props) {
       </div>
       <div className='row no-gutters' style={cardBody}>
         <div className='col-md-2'>
-          <img src={props.image} style={imagestyle} className='pt-4' />
+          {props.image ? <img src={props.image} style={imagestyle} className='pt-4' /> : <p></p>}
         </div>
         <div className='col-md-10 card-bg'>
           <div className='card-body'>
@@ -19,7 +19,19 @@ export default function Book(props) {
                 onClick={() => props.view(props.link)}>
                 View
               </button>
-              <button type='button' className='btn btn-secondary' onClick={props.save}>
+              <button
+                type='button'
+                className='btn btn-secondary'
+                onClick={() =>
+                  props.save(
+                    props.bookId,
+                    props.title,
+                    props.authors,
+                    props.description,
+                    props.image,
+                    props.link
+                  )
+                }>
                 Save
               </button>
             </div>

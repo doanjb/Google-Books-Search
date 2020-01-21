@@ -36,6 +36,7 @@ export default class Search extends Component {
     } else {
       API.googleSearch(searchTerm)
         .then(res => {
+          console.log('res.data :', res.data);
           const books = [];
           res.data.items.forEach(book => {
             books.push({
@@ -43,7 +44,9 @@ export default class Search extends Component {
               title: book.volumeInfo.title,
               author: book.volumeInfo.authors,
               description: book.volumeInfo.description,
-              image: book.volumeInfo.imageLinks.thumbnail,
+              image: book.volumeInfo.imageLinks.thumbnail
+                ? book.volumeInfo.imageLinks.thumbnail
+                : 'http://books.google.com/books/content?id=MMhpS90HrukC&printsec=frontcover&img=1&zoom=1&source=gbs_api',
               link: book.volumeInfo.infoLink
             });
           });
@@ -60,8 +63,12 @@ export default class Search extends Component {
     window.location.href = link;
   };
 
-  save = () => {
-    alert('saved');
+  save = (bookId, title, authors, description, image, link) => {
+    API.saveBook({ bookId, title, authors, description, image, link })
+      .then(res => console.log('res :', res))
+      .catch(err => {
+        console.log('err :', err);
+      });
   };
 
   render() {
