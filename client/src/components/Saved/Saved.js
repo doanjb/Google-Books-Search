@@ -27,7 +27,6 @@ export default class Saved extends Component {
   };
 
   delete = bookId => {
-    console.log('bookId :', bookId);
     API.deleteBook(bookId)
       .then(res => {
         if (res.data.deletedCount === 1) {

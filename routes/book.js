@@ -26,7 +26,7 @@ module.exports = (app, db) => {
   // route to delete a books from the DB
   app.delete(`/api/books/:bookId`, (req, res) => {
     const { bookId } = req.params;
-    console.log('bookId :', bookId);
+
     db.Book.deleteOne({ bookId: bookId })
       .then(newBook => {
         res.status(200).json(newBook);
