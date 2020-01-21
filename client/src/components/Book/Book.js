@@ -1,4 +1,6 @@
 import React from 'react';
+import SearchButtons from './SearchButtons';
+import SaveButtons from './SaveButtons';
 
 export default function Book(props) {
   return (
@@ -13,27 +15,27 @@ export default function Book(props) {
         <div className='col-md-10 card-bg'>
           <div className='card-body'>
             <div className='btn-group w-100' role='group'>
-              <button
-                type='button'
-                className='btn btn-secondary'
-                onClick={() => props.view(props.link)}>
-                View
-              </button>
-              <button
-                type='button'
-                className='btn btn-secondary'
-                onClick={() =>
-                  props.save(
-                    props.bookId,
-                    props.title,
-                    props.author,
-                    props.description,
-                    props.image,
-                    props.link
-                  )
-                }>
-                Save
-              </button>
+              {props.type === 'search' ? (
+                <SearchButtons
+                  link={props.link}
+                  bookId={props.bookId}
+                  title={props.title}
+                  author={props.title}
+                  description={props.description}
+                  image={props.image}
+                  link={props.link}
+                />
+              ) : (
+                <SaveButtons
+                  link={props.link}
+                  bookId={props.bookId}
+                  title={props.title}
+                  author={props.title}
+                  description={props.description}
+                  image={props.image}
+                  link={props.link}
+                />
+              )}
             </div>
           </div>
           <h5 className='card-title px-4'>Authors: {props.author}</h5>

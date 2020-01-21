@@ -5,30 +5,9 @@ import SearchFormContainer from './SearchFormContainer';
 
 export default class Search extends Component {
   state = {
-    books: []
+    books: [],
+    type: 'search'
   };
-
-  componentDidMount() {
-    // API.googleSearch('Harry Potter')
-    //   .then(res => {
-    //     console.log('res.data :', res.data);
-    //     const books = [];
-    //     res.data.items.forEach(book => {
-    //       books.push({
-    //         bookId: book.id,
-    //         title: book.volumeInfo.title,
-    //         author: book.volumeInfo.authors,
-    //         description: book.volumeInfo.description,
-    //         image: book.volumeInfo.imageLinks.thumbnail,
-    //         link: book.volumeInfo.infoLink
-    //       });
-    //     });
-    //     this.setState({ books });
-    //   })
-    //   .catch(err => {
-    //     console.log('err', err);
-    //   });
-  }
 
   searchBook = searchTerm => {
     if (!searchTerm) {
@@ -87,6 +66,7 @@ export default class Search extends Component {
               link={book.link}
               view={this.view}
               save={this.save}
+              type={this.state.type}
             />
           );
         })}
