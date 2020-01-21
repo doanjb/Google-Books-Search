@@ -26,7 +26,7 @@ export default function Book(props) {
                   props.save(
                     props.bookId,
                     props.title,
-                    props.authors,
+                    props.author,
                     props.description,
                     props.image,
                     props.link

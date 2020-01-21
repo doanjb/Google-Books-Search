@@ -7,6 +7,6 @@ export default {
   },
 
   saveBook: (bookId, title, authors, description, image, link) => {
-    return axios.get(`/api/books/`, { bookId, title, authors, description, image, link });
+    return axios.post(`/api/books`, { bookId, title, authors, description, image, link });
   }
 };

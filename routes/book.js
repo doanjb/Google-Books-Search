@@ -19,9 +19,11 @@ module.exports = (app, db) => {
     db.Book.create({ bookId, title, authors, description, image, link })
       .then(newBook => {
         res.status(200).json(newBook);
+        console.log('newBook :', newBook);
       })
       .catch(err => {
         res.status(400).json(err);
+        console.log('err :', err);
       });
   });
 
