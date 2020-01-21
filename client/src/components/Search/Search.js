@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from '../utils/API';
 import Book from '../Book/Book';
+import SearchFormContainer from './SearchFormContainer';
 
 export default class Search extends Component {
   state = {
@@ -8,27 +9,52 @@ export default class Search extends Component {
   };
 
   componentDidMount() {
-    API.googleSearch('Harry Potter')
-      .then(res => {
-        console.log('res.data :', res.data);
-        const books = [];
-        res.data.items.forEach(book => {
-          books.push({
-            bookId: book.id,
-            title: book.volumeInfo.title,
-            author: book.volumeInfo.authors,
-            description: book.volumeInfo.description,
-            image: book.volumeInfo.imageLinks.thumbnail,
-            link: book.volumeInfo.infoLink
-          });
-        });
-
-        this.setState({ books });
-      })
-      .catch(err => {
-        console.log('err', err);
-      });
+    // API.googleSearch('Harry Potter')
+    //   .then(res => {
+    //     console.log('res.data :', res.data);
+    //     const books = [];
+    //     res.data.items.forEach(book => {
+    //       books.push({
+    //         bookId: book.id,
+    //         title: book.volumeInfo.title,
+    //         author: book.volumeInfo.authors,
+    //         description: book.volumeInfo.description,
+    //         image: book.volumeInfo.imageLinks.thumbnail,
+    //         link: book.volumeInfo.infoLink
+    //       });
+    //     });
+    //     this.setState({ books });
+    //   })
+    //   .catch(err => {
+    //     console.log('err', err);
+    //   });
   }
+
+  searchBook = searchTerm => {
+    if (!searchTerm) {
+      alert('You must enter something to search!');
+    } else {
+      API.googleSearch(searchTerm)
+        .then(res => {
+          const books = [];
+          res.data.items.forEach(book => {
+            books.push({
+              bookId: book.id,
+              title: book.volumeInfo.title,
+              author: book.volumeInfo.authors,
+              description: book.volumeInfo.description,
+              image: book.volumeInfo.imageLinks.thumbnail,
+              link: book.volumeInfo.infoLink
+            });
+          });
+
+          this.setState({ books });
+        })
+        .catch(err => {
+          console.log('err', err);
+        });
+    }
+  };
 
   view = link => {
     window.location.href = link;
@@ -40,7 +66,8 @@ export default class Search extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
+        <SearchFormContainer searchBook={this.searchBook} />
         {this.state.books.map(book => {
           return (
             <Book
@@ -55,7 +82,7 @@ export default class Search extends Component {
             />
           );
         })}
-      </div>
+      </React.Fragment>
     );
   }
 }
