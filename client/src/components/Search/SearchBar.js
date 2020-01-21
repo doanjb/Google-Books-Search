@@ -7,7 +7,7 @@ export default class SearchFormContainer extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handlesubmit = e => {
+  handleSubmit = e => {
     e.preventDefault();
     this.props.searchBook(this.state.search);
     this.setState({ search: '' });
@@ -15,17 +15,18 @@ export default class SearchFormContainer extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handlesubmit}>
+      <form onSubmit={this.handleSubmit}>
         <div className='input-group mb-3'>
           <input
             type='text'
             className='form-control'
             placeholder='Enter title of book to search'
             name='search'
+            value={this.state.search}
             onChange={this.handleChange}
           />
           <div className='input-group-append'>
-            <button className='btn btn-outline-secondary' type='button' onClick={this.handlesubmit}>
+            <button className='btn btn-outline-secondary' type='button' onClick={this.handleSubmit}>
               Search
             </button>
           </div>

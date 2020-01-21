@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import API from '../utils/API';
 import Book from '../Book/Book';
-import SearchFormContainer from './SearchFormContainer';
+import SearchBar from './SearchBar';
 
 export default class Search extends Component {
   state = {
@@ -15,7 +15,6 @@ export default class Search extends Component {
     } else {
       API.googleSearch(searchTerm)
         .then(res => {
-          console.log('res.data :', res.data);
           const books = [];
           res.data.items.forEach(book => {
             books.push({
@@ -44,7 +43,7 @@ export default class Search extends Component {
 
   save = (bookId, title, authors, description, image, link) => {
     API.saveBook(bookId, title, authors, description, image, link)
-      .then(res => console.log('res.data :', res.data))
+      .then(res => alert('book saved'))
       .catch(err => {
         console.log('err :', err);
       });
@@ -53,7 +52,7 @@ export default class Search extends Component {
   render() {
     return (
       <main className='container-fluid px-0 pt-5 px-3'>
-        <SearchFormContainer searchBook={this.searchBook} />
+        <SearchBar searchBook={this.searchBook} />
         {this.state.books.map(book => {
           return (
             <Book
