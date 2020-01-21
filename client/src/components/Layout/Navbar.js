@@ -7,18 +7,13 @@ export default class Navbar extends Component {
         <a className='navbar-brand' href='#'>
           Google Books
         </a>
-        <button className='navbar-toggler' type='button' />
 
-        <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
-          <div className='navbar-nav'>
-            <a className='nav-item nav-link' href='/'>
-              Search
-            </a>
-            <a className='nav-item nav-link' href='/saved'>
-              Saved
-            </a>
-          </div>
-        </div>
+        <a className='nav-item nav-link text-white' href='/'>
+          Search
+        </a>
+        <a className='nav-item nav-link text-white' href='/saved'>
+          Saved
+        </a>
       </nav>
     );
   }
