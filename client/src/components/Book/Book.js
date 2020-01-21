@@ -24,6 +24,8 @@ export default function Book(props) {
                   description={props.description}
                   image={props.image}
                   link={props.link}
+                  view={props.view}
+                  save={props.save}
                 />
               ) : (
                 <SaveButtons
@@ -34,6 +36,8 @@ export default function Book(props) {
                   description={props.description}
                   image={props.image}
                   link={props.link}
+                  view={props.view}
+                  delete={props.delete}
                 />
               )}
             </div>

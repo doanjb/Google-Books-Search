@@ -17,19 +17,17 @@ module.exports = (app, db) => {
     db.Book.create({ bookId, title, authors, description, image, link })
       .then(newBook => {
         res.status(200).json(newBook);
-        console.log('newBook :', newBook);
       })
       .catch(err => {
         res.status(400).json(err);
-        console.log('err :', err);
       });
   });
 
   // route to delete a books from the DB
-  app.delete('/api/books', (req, res) => {
-    const { id } = req.body;
-
-    db.Book.deleteOne({ _id: id })
+  app.delete(`/api/books/:bookId`, (req, res) => {
+    const { bookId } = req.params;
+    console.log('bookId :', bookId);
+    db.Book.deleteOne({ bookId: bookId })
       .then(newBook => {
         res.status(200).json(newBook);
       })

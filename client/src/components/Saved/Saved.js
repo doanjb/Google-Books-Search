@@ -9,6 +9,10 @@ export default class Saved extends Component {
   };
 
   componentDidMount() {
+    this.getBooks();
+  }
+
+  getBooks = () => {
     API.getBooks()
       .then(res => {
         this.setState({ books: res.data });
@@ -16,16 +20,20 @@ export default class Saved extends Component {
       .catch(err => {
         console.log('err :', err);
       });
-  }
+  };
 
   view = link => {
     window.location.href = link;
   };
 
   delete = bookId => {
-    console.log('deleted');
+    console.log('bookId :', bookId);
     API.deleteBook(bookId)
-      .then(res => console.log('res.data :', res.data))
+      .then(res => {
+        if (res.data.deletedCount === 1) {
+          this.getBooks();
+        }
+      })
       .catch(err => {
         console.log('err :', err);
       });
