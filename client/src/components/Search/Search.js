@@ -52,7 +52,7 @@ export default class Search extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <main className='container-fluid px-0 pt-5 px-3'>
         <SearchFormContainer searchBook={this.searchBook} />
         {this.state.books.map(book => {
           return (
@@ -70,7 +70,7 @@ export default class Search extends Component {
             />
           );
         })}
-      </React.Fragment>
+      </main>
     );
   }
 }

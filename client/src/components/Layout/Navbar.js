@@ -11,10 +11,10 @@ export default class Navbar extends Component {
 
         <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
           <div className='navbar-nav'>
-            <a className='nav-item nav-link' href='#'>
+            <a className='nav-item nav-link' href='/'>
               Search
             </a>
-            <a className='nav-item nav-link' href='#'>
+            <a className='nav-item nav-link' href='/saved'>
               Saved
             </a>
           </div>

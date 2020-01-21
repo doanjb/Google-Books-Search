@@ -9,17 +9,8 @@ export default function SaveButtons(props) {
       <button
         type='button'
         className='btn btn-secondary'
-        onClick={() =>
-          props.save(
-            props.bookId,
-            props.title,
-            props.author,
-            props.description,
-            props.image,
-            props.link
-          )
-        }>
-        Save
+        onClick={() => props.delete(props.bookId)}>
+        Delete
       </button>
     </React.Fragment>
   );

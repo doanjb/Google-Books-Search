@@ -33,7 +33,7 @@ export default class Saved extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <main className='container-fluid px-0 pt-5 px-3'>
         {this.state.books.map(book => {
           return (
             <Book
@@ -50,7 +50,7 @@ export default class Saved extends Component {
             />
           );
         })}
-      </React.Fragment>
+      </main>
     );
   }
 }
