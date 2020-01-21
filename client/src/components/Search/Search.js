@@ -64,21 +64,7 @@ export default class Search extends Component {
   };
 
   save = (bookId, title, authors, description, image, link) => {
-    console.log('bookId :', bookId);
-    console.log('title :', title);
-    console.log('authors :', authors);
-    console.log('description :', description);
-    console.log('image :', image);
-    console.log('link :', link);
-    description.replace(/"/g, ' ');
-    API.saveBook({
-      bookId,
-      title,
-      authors,
-      description: 'this is a shitty description',
-      image,
-      link
-    })
+    API.saveBook(bookId, title, authors, description, image, link)
       .then(res => console.log('res.data :', res.data))
       .catch(err => {
         console.log('err :', err);
