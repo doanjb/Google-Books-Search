@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import API from '../utils/API';
 import Book from '../Book/Book';
 import SearchBar from './SearchBar';
+import Message from '../Alerts/Message';
 
 export default class Search extends Component {
   state = {
@@ -43,7 +44,9 @@ export default class Search extends Component {
 
   save = (bookId, title, authors, description, image, link) => {
     API.saveBook(bookId, title, authors, description, image, link)
-      .then(res => alert('book saved'))
+      .then(res => {
+        alert('book saved');
+      })
       .catch(err => {
         console.log('err :', err);
       });
@@ -52,12 +55,14 @@ export default class Search extends Component {
   render() {
     return (
       <main className='container-fluid px-0 pt-5 px-3'>
+        <Message message={this.state.search} />
         <SearchBar searchBook={this.searchBook} />
         {this.state.books.map(book => {
           return (
             <Book
               key={book.bookId}
               bookId={book.bookId}
+              // TODO: get authors to display seperated by commas
               title={book.title}
               image={book.image}
               author={book.author}
