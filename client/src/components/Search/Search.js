@@ -2,17 +2,21 @@ import React, { Component } from 'react';
 import API from '../utils/API';
 import Book from '../Book/Book';
 import SearchBar from './SearchBar';
-import Message from '../Alerts/Message';
+import Alert from '../Alerts/Message';
 
 export default class Search extends Component {
   state = {
     books: [],
-    type: 'search'
+    type: 'search',
+    alert: false,
+    message: '',
+    alertType: ''
   };
 
   searchBook = searchTerm => {
+    this.resetMessage();
     if (!searchTerm) {
-      alert('You must enter something to search!');
+      Alert('You must enter something to search!');
     } else {
       API.googleSearch(searchTerm)
         .then(res => {
@@ -33,7 +37,11 @@ export default class Search extends Component {
           this.setState({ books });
         })
         .catch(err => {
-          console.log('err', err);
+          this.setState({
+            alert: true,
+            message: 'Error searching for books...',
+            alertType: 'danger'
+          });
         });
     }
   };
@@ -43,20 +51,33 @@ export default class Search extends Component {
   };
 
   save = (bookId, title, authors, description, image, link) => {
+    this.resetMessage();
     API.saveBook(bookId, title, authors, description, image, link)
       .then(res => {
-        alert('book saved');
+        this.setState({ alert: true, message: 'Success', alertType: 'success' });
       })
       .catch(err => {
-        console.log('err :', err);
+        this.setState({ alert: true, message: 'Error saving book...', alertType: 'danger' });
       });
+  };
+
+  resetMessage = () => {
+    this.setState({ alert: false, message: '', alertType: '' });
   };
 
   render() {
     return (
       <main className='container-fluid px-0 pt-5 px-3'>
-        <Message message={this.state.search} />
         <SearchBar searchBook={this.searchBook} />
+
+        {this.state.alert && (
+          <Alert
+            message={this.state.message}
+            alert={this.state.alertType}
+            resetMessage={this.resetMessage}
+          />
+        )}
+
         {this.state.books.map(book => {
           return (
             <Book
